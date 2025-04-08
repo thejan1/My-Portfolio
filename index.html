@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Welocome | Professional Pattern Designs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pattern-size: 100px;
+            --cursor-x: 50vw;
+            --cursor-y: 50vh;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+            background-color: #f8f5f2;
+        }
+        
+        .cursor {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+        
+        .cursor-follower {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+        }
+        
+        .pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-size: var(--pattern-size) var(--pattern-size);
+            background-position: calc(var(--cursor-x) - 50vw) calc(var(--cursor-y) - 50vh);
+            opacity: 0.15;
+            z-index: -1;
+            transition: background-image 1s ease, opacity 0.5s ease;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .pattern-card {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+        
+        .pattern-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .slide-in {
+            animation: slideIn 1s ease-out forwards;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 2s ease-in forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .pattern-1 {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='%23ff6b6b' fill-opacity='0.2'/%3E%3C/svg%3E");
+        }
+        
+        .pattern-2 {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='40' stroke='%234ecdc4' stroke-width='2' fill='none' fill-opacity='0.2'/%3E%3Ccircle cx='20' cy='20' r='10' fill='%234ecdc4' fill-opacity='0.2'/%3E%3Ccircle cx='80' cy='80' r='10' fill='%234ecdc4' fill-opacity='0.2'/%3E%3C/svg%3E");
+        }
+        
+        .pattern-3 {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L100 0 L100 100 L0 100 Z M10 10 L90 10 L90 90 L10 90 Z' fill='none' stroke='%23ffbe76' stroke-width='2' fill-opacity='0.2'/%3E%3C/svg%3E");
+        }
+        
+        .pattern-4 {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L50 50 L100 0 L50 50 L100 100 L50 50 L0 100 Z' fill='%23a5d8ff' fill-opacity='0.2'/%3E%3C/svg%3E");
+        }
+        
+        .pattern-5 {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L30 0 L0 30 Z M70 0 L100 0 L100 30 Z M0 70 L0 100 L30 100 Z M70 100 L100 100 L100 70 Z' fill='%23b2f2bb' fill-opacity='0.2'/%3E%3C/svg%3E");
+        }
+        
+        .pattern-6 {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20 Q50 0 80 20 T100 50 T80 80 T50 100 T20 80 T0 50 T20 20 Z' fill='%23d8b5ff' fill-opacity='0.2'/%3E%3C/svg%3E");
+        }
+        
+        .btn-hover-effect {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-hover-effect::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .btn-hover-effect:hover::after {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <div class="pattern-bg pattern-1"></div>
+    
+    <header class="fixed w-full z-50 bg-white bg-opacity-90 backdrop-blur-sm shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="logo text-3xl font-bold text-gray-800">W E L C O M E</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-black font-medium transition">Home</a>
+                <a href="#portfolio" class="text-gray-700 hover:text-black font-medium transition">Portfolio</a>
+                <a href="#services" class="text-gray-700 hover:text-black font-medium transition">Services</a>
+                <a href="#contact" class="text-gray-700 hover:text-black font-medium transition">Contact</a>
+            </div>
+            <a href="https://www.fiverr.com/s/99AERyY" target="_blank" class="btn-hover-effect bg-black text-white px-6 py-2 rounded-full font-medium hover:bg-gray-800 transition">
+                Order on Fiverr
+            </a>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="section">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0 slide-in">
+                    <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+                        Transforming Visions Into <span class="text-indigo-600">Patterns</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Custom pattern designs that bring life to fabrics, wallpapers, and digital media. Each design is crafted with precision and creativity.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#portfolio" class="btn-hover-effect bg-indigo-600 text-white px-8 py-3 rounded-full font-medium hover:bg-indigo-700 transition">
+                            View Portfolio
+                        </a>
+                        <a href="https://www.fiverr.com/s/99AERyY" target="_blank" class="btn-hover-effect border-2 border-gray-800 text-gray-800 px-8 py-3 rounded-full font-medium hover:bg-gray-800 hover:text-white transition">
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center floating">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80">
+                        <div class="absolute top-0 left-0 w-full h-full bg-indigo-100 rounded-2xl transform rotate-6"></div>
+                        <div class="absolute top-0 left-0 w-full h-full bg-indigo-200 rounded-2xl transform -rotate-6"></div>
+                        <div class="absolute top-0 left-0 w-full h-full bg-white rounded-2xl shadow-xl flex items-center justify-center overflow-hidden">
+                            <div class="pattern-1 w-full h-full opacity-30"></div>
+                            <div class="absolute text-center p-6">
+                                <h2 class="text-3xl font-bold text-gray-800 mb-2">Pattern Design</h2>
+                                <p class="text-gray-600">by T H E J </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
+        
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="section bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Pattern Portfolio</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Explore my collection of unique pattern designs. Each piece is customizable to fit your specific needs.</p>
+                </div>
+                
+               
+                    
+                    <!-- Pattern 3 -->
+                    <div class="pattern-card bg- <background-image> <img src="C:\Users\Thejan Nethmina\Pictures\floaral patterns"  width="500" height="auto"> </background-image> </div>">
+                        <div class="h-64 bg-green-50 relative overflow-hidden">
+                            <div class="pattern-3 w-full h-full opacity-30"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="bg-white p-4 rounded-lg shadow-md">
+                                    <h3 class="font-bold text-lg text-gray-800">Floral Repeat</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Custom Floral Pattern</h3>
+                            <p class="text-gray-600 mb-4">Beautiful seamless floral design perfect for fabrics and wallpapers.</p>
+                            <a href="https://www.fiverr.com/s/BRlkl35" target="_blank" class="btn-hover-effect inline-block bg-indigo-600 text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-indigo-700 transition">
+                                Order Custom Design
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Pattern 4 -->
+                    <div class="pattern-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl">
+                        <div class="h-64 bg-blue-50 relative overflow-hidden">
+                            <div class="pattern-4 w-full h-full opacity-30"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="bg-white p-4 rounded-lg shadow-md">
+                                    <h3 class="font-bold text-lg text-gray-800">Camouflage</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Modern Camouflage</h3>
+                            <p class="text-gray-600 mb-4">Urban camouflage patterns with customizable color schemes.</p>
+                            <a href="https://www.fiverr.com/s/7Yl3aG4" target="_blank" class="btn-hover-effect inline-block bg-indigo-600 text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-indigo-700 transition">
+                                Order Custom Design
+                            </a>
+                        </div>
+                    </div>
+                    
+              <!-- Pattern 5 -->
+              <div class="pattern-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl">
+                <div class="h-64 bg-blue-50 relative overflow-hidden">
+                    <div class="pattern-4 w-full h-full opacity-30"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="bg-white p-4 rounded-lg shadow-md">
+                            <h3 class="font-bold text-lg text-gray-800"> logo Pattern </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">
+                                pattern design using your logo</h3>
+                            <p class="text-gray-600 mb-4">Unique logo pattern with your logo elements.</p>
+                            <a href="https://www.fiverr.com/s/Ld8x8qA" target="_blank" class="btn-hover-effect inline-block bg-indigo-600 text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-indigo-700 transition">
+                                Order Custom Design
+                            </a>
+                        </div>
+                    </div>
+                    
+                
+                </div>
+            </div>
+        </section>
+        
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">My Services</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive pattern design services tailored to your creative needs.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 pattern-card">
+                        <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-border-all text-indigo-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Custom Repeat Patterns</h3>
+                        <p class="text-gray-600 text-center">Seamless repeating patterns for fabrics, wallpapers, and digital applications.</p>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 pattern-card">
+                        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-palette text-pink-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Color Variations</h3>
+                        <p class="text-gray-600 text-center">Multiple color options for your pattern to match your brand or project.</p>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 pattern-card">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-file-export text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Multiple File Formats</h3>
+                        <p class="text-gray-600 text-center">Delivery in AI, EPS, PNG, JPG, SVG formats for all your needs.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-white pattern-card">
+                    <div class="max-w-3xl mx-auto text-center">
+                        <h3 class="text-3xl font-bold mb-4">Ready to Transform Your Project?</h3>
+                        <p class="text-xl mb-8">Let's create stunning patterns that elevate your brand or product.</p>
+                        <a href="https://www.fiverr.com/s/99AERyY" target="_blank" class="btn-hover-effect inline-block bg-white text-indigo-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition">
+                            Order on Fiverr Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="section bg-gray-900 text-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
+                    <p class="text-xl text-gray-300 max-w-2xl mx-auto">Have a project in mind? Contact me to discuss your pattern design needs.</p>
+                </div>
+                
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                
+                               
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-globe text-indigo-400"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-gray-300">My Fiverr profile:</p>
+                                    <a href="https://www.fiverr.com/s/99AERyY" target="_blank" class="font-medium hover:text-indigo-400 transition">fiverr.com/patternartistry</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-clock text-indigo-400"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-gray-300">Availability:</p>
+                                    <p class="font-medium">Monday - Sundays 5AM - 11PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                       
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">Send a Message</h3>
+                        <p class="text-gray-300 mb-6">Please contact me through Fiverr for all inquiries and orders.</p>
+                        <a href="https://www.fiverr.com/s/99AERyY" target="_blank" class="btn-hover-effect inline-block bg-indigo-600 text-white px-8 py-3 rounded-full font-medium hover:bg-indigo-700 transition">
+                            Message Me on Fiverr
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-800 text-gray-300 py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="logo text-2xl font-bold text-white mb-4 md:mb-0">PatternArtistry</div>
+                <div class="text-sm">
+                    <p>&copy; 2023 PatternArtistry. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+                
+                // Update CSS variables for pattern position
+                document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
+                document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
+            }, 100);
+        });
+        
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+        });
+        
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+            cursorFollower.style.opacity = '0';
+        });
+        
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.2)';
+        });
+        
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+        
+        // Hover effects on links and buttons
+        const hoverables = document.querySelectorAll('a, button, .pattern-card');
+        
+        hoverables.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursor.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.5)';
+                cursorFollower.style.borderColor = 'rgba(79, 70, 229, 0.5)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorFollower.style.borderColor = 'rgba(0, 0, 0, 0.3)';
+            });
+        });
+        
+        // Pattern background cycling
+        const patternBg = document.querySelector('.pattern-bg');
+        const patterns = ['pattern-1', 'pattern-2', 'pattern-3', 'pattern-4', 'pattern-5', 'pattern-6'];
+        let currentPattern = 0;
+        let timeout;
+        let lastMoveTime = Date.now();
+        
+        function cyclePattern() {
+            currentPattern = (currentPattern + 1) % patterns.length;
+            patternBg.classList.remove(...patterns);
+            patternBg.classList.add(patterns[currentPattern]);
+        }
+        
+        function checkMovement() {
+            const now = Date.now();
+            if (now - lastMoveTime > 3000) { // 3 seconds without movement
+                cyclePattern();
+            }
+            timeout = setTimeout(checkMovement, 3000);
+        }
+        
+        document.addEventListener('mousemove', () => {
+            lastMoveTime = Date.now();
+        });
+        
+        // Start checking for movement
+        timeout = setTimeout(checkMovement, 3000);
+        
+        // Initial animation triggers
+        document.addEventListener('DOMContentLoaded', () => {
+            const slideIns = document.querySelectorAll('.slide-in');
+            const fadeIns = document.querySelectorAll('.fade-in');
+            
+            slideIns.forEach((el, i) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateX(0)';
+                }, i * 200);
+            });
+            
+            fadeIns.forEach((el, i) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                }, 500 + i * 200);
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
